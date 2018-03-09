@@ -5,37 +5,6 @@ const jwt = require("jsonwebtoken");
 const pbk = require("pbkdf2");
 const auth = require("./auth.controller");
 
-// let validSuperUser = async (tokenHeader) => {
-//     let validateJwt;
-//     let validateRole;
-//
-//     let decoded = jwt.verify(tokenHeader, conf.secret);
-//     if (decoded) {
-//         console.log(decoded);
-//         validateJwt = true;
-//         await User
-//             .findOne({email: decoded.user, isSuperAdmin: true})
-//             .then(doc => {
-//                 console.log(doc);
-//                 validateRole = true;
-//             })
-//             .catch(err => {
-//                 console.error(err);
-//                 validateRole = false;
-//             });
-//
-//         return {
-//             tokenValid: validateJwt,
-//             roleValid: validateRole
-//         };
-//     } else {
-//         return {
-//             tokenValid: null,
-//             roleValid: null
-//         };
-//     }
-// };
-
 module.exports.authenticate = (req, res) => {
     let email = req.body.email;
     let password = req.body.password;

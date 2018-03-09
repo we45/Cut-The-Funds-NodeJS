@@ -21,4 +21,9 @@ router
         check('limit').isDecimal()
     ]);
 
+router
+    .route("/search_expense_db")
+    .post(project.searchExpenseDb);
+
+
 module.exports = router;
