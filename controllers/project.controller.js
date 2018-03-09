@@ -22,3 +22,53 @@ module.exports.projectCreate = async (req, res) => {
         res.status(403).json({error: "Not Authorized"})
     }
 };
+
+module.exports.listProjects = async (req, res) => {
+    try {
+        let tokenHeader = req.header("Authorization");
+        let validObject = await auth.validateManager(tokenHeader, "view_project");
+        if (validObject.tokenValid && validObject.roleValid) {
+            Project
+                .find()
+                .then(doc => {
+                    res.status(200).json(doc)
+                })
+                .catch(err => {
+                    res.status(400).json({error: err})
+                })
+
+        } else {
+            res.status(403).json({error: "not authorized"})
+        }
+    } catch (err) {
+        res.status(400).json({error: err})
+    }
+
+};
+
+module.exports.updateProject = async (req, res) => {
+  try {
+      let tokenHeader = req.header("Authorization");
+      let validObject = await auth.validateManager(tokenHeader, "modify_project");
+      if (validObject.tokenValid && validObject.roleValid) {
+          let projectId = req.params.projectId;
+          Project
+              .findByIdAndUpdate(
+                  projectId,
+                  req.body,
+                  {new: true},
+              )
+              .then(doc => {
+                  res.status(200).json(doc)
+              })
+              .catch(err => {
+                  res.status(400).json({error: err})
+              })
+      } else {
+          res.status(403).json({error: "not authorized"})
+      }
+
+  } catch (err) {
+      res.status(400).json({error: err})
+  }
+};
