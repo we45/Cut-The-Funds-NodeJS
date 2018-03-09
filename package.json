@@ -10,12 +10,15 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "express-fileupload": "^0.4.0",
     "express-validator": "^5.0.3",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.2.0",
     "mongoose": "^5.0.8",
     "morgan": "~1.9.0",
+    "mysql": "^2.15.0",
     "pbkdf2": "^3.0.14",
+    "randomstring": "^1.1.5",
     "readline-sync": "^1.4.9",
     "serve-favicon": "~2.4.5"
   }

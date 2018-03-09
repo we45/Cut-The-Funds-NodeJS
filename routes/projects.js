@@ -10,4 +10,20 @@ router
         check('limit').isDecimal()
     ]);
 
+router
+    .route("/list_projects")
+    .get(project.listProjects);
+
+router
+    .route("/update_project/:projectId")
+    .post(project.updateProject,[
+        check('name').exists(),
+        check('limit').isDecimal()
+    ]);
+
+router
+    .route("/search_expense_db")
+    .post(project.searchExpenseDb);
+
+
 module.exports = router;
