@@ -11,6 +11,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const projects = require("./routes/projects");
 const expenses = require("./routes/expenses");
+const helmet = require("helmet");
 
 
 const app = express();
@@ -27,6 +28,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet({
+    frameguard: {
+        action: "deny"
+    }
+}));
+
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
+    }
+ }));
 
 app.use('/', index);
 app.use('/users', users);

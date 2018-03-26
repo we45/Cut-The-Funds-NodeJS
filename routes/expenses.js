@@ -28,5 +28,9 @@ router
     .route("/update_expense/:expId")
     .post(expense.updateExpense);
 
+router
+    .route("/single_expense;/:expId")
+    .get(expense.getSingleExpense);
+
 
 module.exports = router;

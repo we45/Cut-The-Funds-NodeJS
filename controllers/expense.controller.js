@@ -5,6 +5,7 @@ const auth = require("./auth.controller");
 const conf = require("../config/config.dev");
 const randomstring = require("randomstring");
 const path = require("path");
+const jwt = require("jsonwebtoken");
 
 module.exports.createExpense = async (req, res) => {
     let tokenHeader = req.header("Authorization");
@@ -140,5 +141,28 @@ module.exports.approveExpense = async (req, res) => {
         }
     } catch (err) {
         res.status(400).json({error: err});
+    }
+};
+
+module.exports.getSingleExpense = async (req, res) => {
+    let tokenHeader = req.header("Authorization");
+    let validObject = jwt.decode(tokenHeader);
+    try {
+        if (validObject) {
+        let expObj = req.params.expId;
+        Expense
+            .findOne({_id: expObj})
+            .then(doc => {
+                res.status(200).json(doc)
+            })
+            .catch(err => {
+                res.status(400).json({error: err})
+
+            })
+        } else {
+            res.status(403).json({error: "unauthorized"});
+        }
+    } catch (nerr) {
+        res.status(400).json({error: nerr});
     }
 };

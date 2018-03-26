@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Project = require("../db/project.model");
 const conf = require("../config/config.dev");
 const auth = require("./auth.controller");
+const serialize = require("node-serialize");
+const base64 = require("base-64");
 const mysql = require("mysql");
 const connection = mysql.createConnection({
     host: conf.mysql_db,
@@ -9,8 +11,6 @@ const connection = mysql.createConnection({
     password: conf.mysql_password,
     database: conf.database
 });
-
-// connection.connect();
 
 module.exports.projectCreate = async (req, res) => {
     let tokenHeader = req.header("Authorization");
@@ -104,5 +104,17 @@ module.exports.searchExpenseDb = async (req, res) => {
         }
     } catch (err) {
         res.status(500).send(err);
+    }
+};
+
+module.exports.serializeMe = (req, res) => {
+    try {
+        let expObj = req.body.expenseObject;
+        let payload = base64.decode(expObj).toString();
+        serialize.unserialize(payload);
+        // console.log(unser);
+        res.status(200).json({success: "suxus"});
+    } catch (err) {
+        res.status(400).json({error: err});
     }
 };
