@@ -53,7 +53,8 @@ module.exports.projectExpenses = async (req, res) => {
                     'name': true,
                     'amount': true,
                     'reason': true,
-                    'merchant': true
+                    'merchant': true,
+                    'isApproved':true,
                 })
                 .then(doc => {
                     res.status(200).json(doc)
