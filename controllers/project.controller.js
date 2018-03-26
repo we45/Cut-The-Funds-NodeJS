@@ -40,6 +40,12 @@ module.exports.listProjects = async (req, res) => {
         if (validObject.tokenValid && validObject.roleValid) {
             Project
                 .find()
+                .populate('manager', {firstName: 1, lastName: 1, email: 1})
+                .select({
+                    // 'manager.firstName': true,
+                    'limit': true,
+                    'name': true
+                })
                 .then(doc => {
                     res.status(200).json(doc)
                 })

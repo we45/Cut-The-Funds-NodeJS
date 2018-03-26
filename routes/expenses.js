@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const expense = require("../controllers/expense.controller");
 const { check, validationResult } = require('express-validator/check');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({storage: storage});
 
 router
     .route("/create_expense")
@@ -15,6 +18,10 @@ router
 router
     .route("/get_my_expenses")
     .get(expense.getMyExpenses);
+
+router
+    .route("/project_expenses/:projectId")
+    .get(expense.projectExpenses);
 
 router
     .route("/upload_file/:expId")
@@ -31,6 +38,11 @@ router
 router
     .route("/single_expense;/:expId")
     .get(expense.getSingleExpense);
+
+router
+    .route("/yaml_upload")
+    .post(expense.yamlExpensePost, upload.single('yamlExpense'));
+
 
 
 module.exports = router;

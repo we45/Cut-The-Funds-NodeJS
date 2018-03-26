@@ -6,6 +6,7 @@ const conf = require("../config/config.dev");
 const randomstring = require("randomstring");
 const path = require("path");
 const jwt = require("jsonwebtoken");
+const yaml = require('js-yaml');
 
 module.exports.createExpense = async (req, res) => {
     let tokenHeader = req.header("Authorization");
@@ -40,6 +41,28 @@ module.exports.createExpense = async (req, res) => {
     }
 };
 
+module.exports.projectExpenses = async (req, res) => {
+    let tokenHeader = req.header("Authorization");
+    let validObject = await auth.validateManager(tokenHeader, "approve_expense");
+    try {
+        if (validObject.tokenValid && validObject.roleValid) {
+            let projectId = req.params.projectId;
+            Expense
+                .find({project: projectId})
+                .then(doc => {
+                    res.status(200).json(doc)
+                })
+                .catch(err => {
+                    res.status(400).json({error: err})
+                })
+        } else {
+            res.status(403).json({error: "not authorized"})
+        }
+    } catch (err) {
+        res.status(400).json({error: err});
+    }
+};
+
 module.exports.getMyExpenses = async (req, res) => {
     let tokenHeader = req.header("Authorization");
     let validObject = await auth.validateUser(tokenHeader, "view_expense");
@@ -70,8 +93,8 @@ module.exports.addExpenseFile = async (req, res) => {
     try {
         if (validObject.tokenValid && validObject.roleValid) {
             let expObj = req.params.expId;
-            let uploadFile = req.files.expenseFile;
-            let fileExt = path.extname(uploadFile.name);
+                let uploadFile = req.files.expenseFile;
+                let fileExt = path.extname(uploadFile.name);
             let randFileName = randomstring.generate({length: 10, charset: "alphabetic"});
             let desc = req.body.description;
             let fullPath = conf.uploadDir + "/" + randFileName + fileExt;
@@ -164,5 +187,26 @@ module.exports.getSingleExpense = async (req, res) => {
         }
     } catch (nerr) {
         res.status(400).json({error: nerr});
+    }
+};
+
+module.exports.yamlExpensePost = async (req, res) => {
+    // let tokenHeader = req.header("Authorization");
+    // let validObject = jwt.decode(tokenHeader);
+    try {
+        // if (validObject) {
+        let yamlExpense = req.files.yamlExpense;
+        let ybuf = yamlExpense.data;
+        let ystring = ybuf.toString();
+
+        let y = yaml.load(ystring);
+        console.log(y.expenses[0].expense.reason());
+        res.status(200).json(y);
+        // } else {
+        //     res.status(403).json({error: "Invalid access attempt"});
+        // }
+    } catch (err) {
+        console.log(err);
+        res.status(400).json({error: err});
     }
 };
