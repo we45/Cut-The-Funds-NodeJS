@@ -8,6 +8,7 @@ var projectSchema = new Schema({
         ref: "User"
     },
     limit: Number,
+    remarks: String
 });
 
 module.exports = mongoose.model("Project", projectSchema);
