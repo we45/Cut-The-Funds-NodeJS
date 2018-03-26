@@ -20,7 +20,8 @@ module.exports.projectCreate = async (req, res) => {
         Project.create({
             name: req.body.projectName,
             manager: mongoose.Types.ObjectId(validObject.manager),
-            limit: req.body.limit
+            limit: req.body.limit,
+            remarks: req.body.remarks
         })
             .then(doc => {
                 res.status(201).json({project: doc._id})
