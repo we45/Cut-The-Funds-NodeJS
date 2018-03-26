@@ -49,6 +49,12 @@ module.exports.projectExpenses = async (req, res) => {
             let projectId = req.params.projectId;
             Expense
                 .find({project: projectId})
+                .select({
+                    'name': true,
+                    'amount': true,
+                    'reason': true,
+                    'merchant': true
+                })
                 .then(doc => {
                     res.status(200).json(doc)
                 })
