@@ -23,7 +23,6 @@ module.exports.authenticate = (req, res) => {
 };
 
 module.exports.userCreate = async (req, res) => {
-    console.log(req.body.email, req.body.lastName, req.body.password);
     let tokenHeader = req.header("Authorization");
     let validObject = await auth.validateSuperUser(tokenHeader);
     if (validObject.tokenValid && validObject.roleValid) {
@@ -44,4 +43,21 @@ module.exports.userCreate = async (req, res) => {
         res.status(400).json({error: "not happening bro"})
     }
 
+};
+
+module.exports.createCard = async (req, res) => {
+    let tokenHeader = req.header("Authorization");
+    let validObject = await auth.validateUser(tokenHeader, "create_card");
+    if (validObject.tokenValid && validObject.roleValid) {
+        User
+            .update({_id: validObject.user}, {$push: {cards: req.body.cardNumber}})
+            .then(doc => {
+                res.status(200).json(doc);
+            })
+            .catch(err => {
+                res.status(400).json({error: err});
+            })
+    } else {
+        res.status(403).json({error: "unauthorized"});
+    }
 };

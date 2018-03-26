@@ -20,4 +20,9 @@ router
     .post(user.authenticate);
 
 
+router
+    .route('/create_card')
+    .post(user.createCard);
+
+
 module.exports = router;
