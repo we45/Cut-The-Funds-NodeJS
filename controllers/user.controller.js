@@ -14,7 +14,7 @@ module.exports.authenticate = (req, res) => {
         .then(doc => {
             console.log(doc);
             let authToken = jwt.sign({user: doc.email}, conf.secret, {expiresIn: 86400});
-            res.status(200).json({auth: true, token: authToken, userType: doc.userType})
+            res.status(200).json({auth: true, token: authToken, userType: doc.userType, email: doc.email})
         })
         .catch(err => {
             console.error(err);
