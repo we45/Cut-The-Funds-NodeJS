@@ -36,7 +36,7 @@ router
     .post(expense.updateExpense);
 
 router
-    .route("/single_expense;/:expId")
+    .route("/single_expense/:expId")
     .get(expense.getSingleExpense);
 
 router

@@ -12,7 +12,12 @@ router
 
 router
     .route("/list_projects")
-    .get(project.listProjects);
+    .get(project.listProjectsManager);
+
+router
+    .route("/user_projects")
+    .get(project.listProjectsUser);
+
 
 router
     .route("/update_project/:projectId")

@@ -34,7 +34,7 @@ module.exports.projectCreate = async (req, res) => {
     }
 };
 
-module.exports.listProjects = async (req, res) => {
+module.exports.listProjectsManager = async (req, res) => {
     try {
         let tokenHeader = req.header("Authorization");
         let validObject = await auth.validateManager(tokenHeader, "view_project");
@@ -57,6 +57,31 @@ module.exports.listProjects = async (req, res) => {
     }
 
 };
+
+module.exports.listProjectsUser = async (req, res) => {
+    try {
+        let tokenHeader = req.header("Authorization");
+        let validObject = await auth.validateUser(tokenHeader, "create_expense");
+        if (validObject.tokenValid && validObject.roleValid) {
+            Project
+                .find()
+                .populate('manager', {firstName: 1, lastName: 1, email: 1})
+                .then(doc => {
+                    res.status(200).json(doc)
+                })
+                .catch(err => {
+                    res.status(400).json({error: err})
+                })
+
+        } else {
+            res.status(403).json({error: "not authorized"})
+        }
+    } catch (err) {
+        res.status(400).json({error: err})
+    }
+
+};
+
 
 module.exports.updateProject = async (req, res) => {
   try {
