@@ -43,6 +43,9 @@ router
     .route("/yaml_upload")
     .post(expense.yamlExpensePost, upload.single('yamlExpense'));
 
+router
+    .route('/dash')
+    .get(expense.getStats);
 
 
 module.exports = router;

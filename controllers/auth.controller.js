@@ -131,3 +131,43 @@ module.exports.validateUser = async (tokenHeader, action) => {
 
 
 };
+
+module.exports.justAuthenticate = async (tokenHeader) => {
+    let validateJwt;
+    let userId;
+    let userType;
+    try {
+        let decoded = jwt.verify(tokenHeader, conf.secret);
+        if (decoded) {
+            validateJwt = true;
+            await User
+                .findOne({email: decoded.user})
+                .then(doc => {
+                    userId = doc._id
+                    userType = doc.userType;
+                })
+                .catch(err => {
+                    userId = null;
+                    userType = null;
+                });
+
+            return {
+                tokenValid: validateJwt,
+                user: userId,
+                userType: userType
+            }
+        } else {
+            return {
+                tokenValid: null,
+                user: null,
+                userType: null
+            };
+        }
+    } catch (err) {
+        return {
+            tokenValid: null,
+            user: null,
+            userType: userType
+        };
+    }
+}

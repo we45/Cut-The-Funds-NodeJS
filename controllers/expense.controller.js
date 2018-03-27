@@ -104,7 +104,7 @@ module.exports.addExpenseFile = async (req, res) => {
                 let fileExt = path.extname(uploadFile.name);
             let randFileName = randomstring.generate({length: 10, charset: "alphabetic"});
             let desc = req.body.description;
-            let fullPath = conf.uploadDir + "/" + randFileName + fileExt;
+            let fullPath = "../uploads" + randFileName + fileExt;
             uploadFile.mv(fullPath, function (err) {
                 if (err) {
                     res.status(400).json({error: err})
@@ -215,5 +215,49 @@ module.exports.yamlExpensePost = async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(400).json({error: err});
+    }
+};
+
+module.exports.getStats = async (req, res) => {
+    let tokenHeader = req.header("Authorization");
+    let validObject = await auth.justAuthenticate(tokenHeader);
+    if (validObject.tokenValid) {
+        console.log(validObject);
+        let approvedUnApproved;
+        let expByReason;
+        if (validObject.userType === 'user') {
+            let approved;
+            let total;
+            await Expense.count({user: validObject.user, isApproved: true})
+                .then(doc => {
+                    approved = doc;
+                    console.log("Approved: " + approved)
+                })
+                .catch(err => {
+                    res.status(400).json({error: err})
+                });
+
+            await Expense.count({user: validObject.user})
+                .then(doc => {
+                    total = doc;
+                    console.log(total);
+                })
+                .catch(err => {
+                    res.status(400).json({error: err})
+                });
+            //
+            await Expense.aggregate([{$match: {user: validObject.user}},{$group: {_id: '$reason', total: {$sum: '$amount'}}}, {$sort: {total: -1}}])
+                .then(doc => {
+                    expByReason = doc;
+                    console.log(expByReason);
+                })
+                .catch(err => {
+                    res.status(400).json({error: err})
+                });
+
+            res.status(200).json({approvedStats: {approved: approved, total: total}, expReason: expByReason});
+        }
+    } else {
+        res.status(403).json({error: "unauthorized"})
     }
 };

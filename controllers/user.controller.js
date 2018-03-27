@@ -68,7 +68,12 @@ module.exports.listCards = async (req, res) => {
     if (validObject.tokenValid && validObject.roleValid) {
         User
             .findOne({_id: validObject.user})
-            .select({"cards": true})
+            .select({
+                "cards": true,
+                "firstName": true,
+                "lastName": true,
+                "email": true,
+            })
             .then(doc => {
                 res.status(200).json(doc);
             })
