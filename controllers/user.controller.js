@@ -61,3 +61,22 @@ module.exports.createCard = async (req, res) => {
         res.status(403).json({error: "unauthorized"});
     }
 };
+
+module.exports.listCards = async (req, res) => {
+    let tokenHeader = req.header("Authorization");
+    let validObject = await auth.validateUser(tokenHeader, "create_card");
+    if (validObject.tokenValid && validObject.roleValid) {
+        User
+            .findOne({_id: validObject.user})
+            .select({"cards": true})
+            .then(doc => {
+                res.status(200).json(doc);
+            })
+            .catch(err => {
+                res.status(400).json({error: err});
+            })
+    } else {
+        res.status(403).json({error: "unauthorized"});
+    }
+
+};
