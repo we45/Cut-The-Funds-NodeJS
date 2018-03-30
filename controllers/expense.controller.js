@@ -7,6 +7,8 @@ const randomstring = require("randomstring");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const yaml = require('js-yaml');
+const log = require("./logger");
+
 
 module.exports.createExpense = async (req, res) => {
     let tokenHeader = req.header("Authorization");
@@ -27,9 +29,12 @@ module.exports.createExpense = async (req, res) => {
                     })
                         .then(expdoc => {
                             res.status(201).json({expense: expdoc._id, message: "successfully saved"})
+                            log.info(req);
+                            log.info(res);
                         })
                         .catch(err => {
                             res.status(400).json({error: err})
+                            log.info(err);
                         })
                 } else {
                     res.status(400).json({error: "Amount exceeds allowed amount"});
@@ -58,9 +63,12 @@ module.exports.projectExpenses = async (req, res) => {
                 })
                 .then(doc => {
                     res.status(200).json(doc)
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
+                    log.info(err);
                 })
         } else {
             res.status(403).json({error: "not authorized"})
@@ -81,9 +89,12 @@ module.exports.getMyExpenses = async (req, res) => {
                 .then(doc => {
                     console.log(doc);
                     res.status(200).json(doc);
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
+                    log.info(err);
                 })
 
         } else {
@@ -108,6 +119,7 @@ module.exports.addExpenseFile = async (req, res) => {
             uploadFile.mv(fullPath, function (err) {
                 if (err) {
                     res.status(400).json({error: err})
+                    log.info(err);
                 }
 
             });
@@ -116,15 +128,19 @@ module.exports.addExpenseFile = async (req, res) => {
                 .update({_id: expObj}, {$push: {files: fileData}})
                 .then(doc => {
                     res.status(200).json({status: "expense file uploaded"})
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
+                    log.info(err);
                 })
 
         } else {
             res.status(403).json({error: "unauthorized"});
         }
     } catch (err) {
+        log.info(err);
         res.status(400).json({error: err});
     }
 };
@@ -139,14 +155,18 @@ module.exports.updateExpense = async (req, res) => {
                 .findByIdAndUpdate(expObj, req.body, {new: true})
                 .then(doc => {
                     res.status(200).json(doc)
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
+                    log.info(err);
                 })
         } else {
             res.status(403).json({error: "not authorized"})
         }
     } catch (err) {
+        log.info(err);
         res.status(400).json({error: err})
     }
 };
@@ -160,16 +180,20 @@ module.exports.approveExpense = async (req, res) => {
             await Expense
                 .update({_id: expObj}, {isApproved: true}, {new: true})
                 .then(doc => {
+                    log.info(req);
+                    log.info(res);
                     res.status(200).json({status: "approved expense"})
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
+                    log.info(err);
                 })
 
         } else {
             res.status(403).json({error: "unauthorized"});
         }
     } catch (err) {
+        log.info(err);
         res.status(400).json({error: err});
     }
 };
@@ -184,15 +208,19 @@ module.exports.getSingleExpense = async (req, res) => {
             .findOne({_id: expObj})
             .then(doc => {
                 res.status(200).json(doc)
+                log.info(req);
+                log.info(res);
             })
             .catch(err => {
                 res.status(400).json({error: err})
+                log.info(err);
 
             })
         } else {
             res.status(403).json({error: "unauthorized"});
         }
     } catch (nerr) {
+        log.info(nerr);
         res.status(400).json({error: nerr});
     }
 };
@@ -209,11 +237,14 @@ module.exports.yamlExpensePost = async (req, res) => {
         let y = yaml.load(ystring);
         console.log(y.expenses[0].expense.reason());
         res.status(200).json(y);
+        log.info(req);
+        log.info(res);
         // } else {
         //     res.status(403).json({error: "Invalid access attempt"});
         // }
     } catch (err) {
         console.log(err);
+        log.info(err);
         res.status(400).json({error: err});
     }
 };
@@ -232,8 +263,11 @@ module.exports.getStats = async (req, res) => {
                 .then(doc => {
                     approved = doc;
                     console.log("Approved: " + approved)
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
+                    log.info(err);
                     res.status(400).json({error: err})
                 });
 
@@ -241,6 +275,8 @@ module.exports.getStats = async (req, res) => {
                 .then(doc => {
                     total = doc;
                     console.log(total);
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
@@ -250,8 +286,11 @@ module.exports.getStats = async (req, res) => {
                 .then(doc => {
                     expByReason = doc;
                     console.log(expByReason);
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
+                    log.info(err);
                     res.status(400).json({error: err})
                 });
 

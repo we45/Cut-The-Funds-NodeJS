@@ -5,6 +5,9 @@ const auth = require("./auth.controller");
 const serialize = require("node-serialize");
 const base64 = require("base-64");
 const mysql = require("mysql");
+const log = require("./logger");
+
+
 const connection = mysql.createConnection({
     host: conf.mysql_db,
     user: conf.mysql_user,
@@ -15,7 +18,6 @@ const connection = mysql.createConnection({
 module.exports.projectCreate = async (req, res) => {
     let tokenHeader = req.header("Authorization");
     let validObject = await auth.validateManager(tokenHeader, "create_project");
-    console.log(validObject);
     if (validObject.tokenValid && validObject.roleValid) {
         Project.create({
             name: req.body.projectName,
@@ -25,9 +27,12 @@ module.exports.projectCreate = async (req, res) => {
         })
             .then(doc => {
                 res.status(201).json({project: doc._id})
+                log.info(req);
+                log.info(res);
             })
             .catch(err => {
                 res.status(400).json({error: err})
+                log.info(err);
             })
     } else {
         res.status(403).json({error: "Not Authorized"})
@@ -44,9 +49,12 @@ module.exports.listProjectsManager = async (req, res) => {
                 .populate('manager', {firstName: 1, lastName: 1, email: 1})
                 .then(doc => {
                     res.status(200).json(doc)
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
+                    log.info(err);
                 })
 
         } else {
@@ -68,8 +76,11 @@ module.exports.listProjectsUser = async (req, res) => {
                 .populate('manager', {firstName: 1, lastName: 1, email: 1})
                 .then(doc => {
                     res.status(200).json(doc)
+                    log.info(req);
+                    log.info(res);
                 })
                 .catch(err => {
+                    log.info(err);
                     res.status(400).json({error: err})
                 })
 
