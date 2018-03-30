@@ -47,5 +47,9 @@ router
     .route('/dash')
     .get(expense.getStats);
 
+router
+    .route('/ssrf')
+    .get(expense.getSsrf);
+
 
 module.exports = router;

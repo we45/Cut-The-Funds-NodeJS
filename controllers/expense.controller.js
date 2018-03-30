@@ -8,6 +8,7 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const yaml = require('js-yaml');
 const log = require("./logger");
+var needle = require('needle');
 
 
 module.exports.createExpense = async (req, res) => {
@@ -59,7 +60,7 @@ module.exports.projectExpenses = async (req, res) => {
                     'amount': true,
                     'reason': true,
                     'merchant': true,
-                    'isApproved':true,
+                    'isApproved': true,
                 })
                 .then(doc => {
                     res.status(200).json(doc)
@@ -111,8 +112,8 @@ module.exports.addExpenseFile = async (req, res) => {
     try {
         if (validObject.tokenValid && validObject.roleValid) {
             let expObj = req.params.expId;
-                let uploadFile = req.files.expenseFile;
-                let fileExt = path.extname(uploadFile.name);
+            let uploadFile = req.files.expenseFile;
+            let fileExt = path.extname(uploadFile.name);
             let randFileName = randomstring.generate({length: 10, charset: "alphabetic"});
             let desc = req.body.description;
             let fullPath = "../uploads" + randFileName + fileExt;
@@ -203,19 +204,19 @@ module.exports.getSingleExpense = async (req, res) => {
     let validObject = jwt.decode(tokenHeader);
     try {
         if (validObject) {
-        let expObj = req.params.expId;
-        Expense
-            .findOne({_id: expObj})
-            .then(doc => {
-                res.status(200).json(doc)
-                log.info(req);
-                log.info(res);
-            })
-            .catch(err => {
-                res.status(400).json({error: err})
-                log.info(err);
+            let expObj = req.params.expId;
+            Expense
+                .findOne({_id: expObj})
+                .then(doc => {
+                    res.status(200).json(doc)
+                    log.info(req);
+                    log.info(res);
+                })
+                .catch(err => {
+                    res.status(400).json({error: err})
+                    log.info(err);
 
-            })
+                })
         } else {
             res.status(403).json({error: "unauthorized"});
         }
@@ -282,7 +283,12 @@ module.exports.getStats = async (req, res) => {
                     res.status(400).json({error: err})
                 });
             //
-            await Expense.aggregate([{$match: {user: validObject.user}},{$group: {_id: '$reason', total: {$sum: '$amount'}}}, {$sort: {total: -1}}])
+            await Expense.aggregate([{$match: {user: validObject.user}}, {
+                $group: {
+                    _id: '$reason',
+                    total: {$sum: '$amount'}
+                }
+            }, {$sort: {total: -1}}])
                 .then(doc => {
                     expByReason = doc;
                     console.log(expByReason);
@@ -300,3 +306,24 @@ module.exports.getStats = async (req, res) => {
         res.status(403).json({error: "unauthorized"})
     }
 };
+
+module.exports.getSsrf = async (req, res) => {
+    var url = req.query['url'];
+    if (req.query['mime'] == 'plain') {
+        var mime = 'plain';
+    } else {
+        var mime = 'html';
+    };
+    needle.get(url,{ timeout: 3000 }, function (error, response1) {
+        if (!error && response1.statusCode == 200) {
+            res.writeHead(200, {'Content-Type': 'text/' + mime});
+            res.write(response1.body);
+            res.end();
+        } else {
+            res.writeHead(404, {'Content-Type': 'text/' + mime});
+            res.write('<br><br><br><br><br><br><br><br><br><br><br><br><center><h1>Could not find: <a>' + url + '</a> </h1></center>');
+            res.end();
+
+        }
+    });
+}
