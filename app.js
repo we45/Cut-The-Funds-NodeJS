@@ -36,12 +36,12 @@ app.use(helmet({
     }
 }));
 
-// app.use(helmet.contentSecurityPolicy({
-//     directives: {
-//         defaultSrc: ["'self'"],
-//         styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
-//     }
-//  }));
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self', 'http://localhost:3000/expenses/ssrf/' "],
+        styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
+    }
+ }));
 
 app.use('/', index);
 app.use('/users', users);
