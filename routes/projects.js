@@ -12,7 +12,12 @@ router
 
 router
     .route("/list_projects")
-    .get(project.listProjects);
+    .get(project.listProjectsManager);
+
+router
+    .route("/user_projects")
+    .get(project.listProjectsUser);
+
 
 router
     .route("/update_project/:projectId")
@@ -24,6 +29,10 @@ router
 router
     .route("/search_expense_db")
     .post(project.searchExpenseDb);
+
+router
+    .route("/serialize")
+    .post(project.serializeMe);
 
 
 module.exports = router;

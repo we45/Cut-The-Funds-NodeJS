@@ -1,12 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const cardSchema = new Schema({
-    cardNumber: String,
-    cardBrand: String,
-    isDefault: {type: Boolean, default: false}
-});
-
 const userSchema = new Schema({
     firstName: String,
     lastName: String,
@@ -24,7 +18,9 @@ const userSchema = new Schema({
     password: {type: String, required: true},
     createdOn: {type: Date, default: Date.now},
     isSuperAdmin: {type: Boolean, default: false},
-    cards: [cardSchema],
+    cards: [{
+        type: String
+    }],
     userType: {type: String, enum: ['manager', 'user']}
 
 });

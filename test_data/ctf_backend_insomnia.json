@@ -1,0 +1,552 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-03-27T03:34:59.876Z",
+	"__export_source": "insomnia.desktop.app:v5.14.9",
+	"resources": [
+		{
+			"_id": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"created": 1520328485869,
+			"description": "",
+			"modified": 1520328485869,
+			"name": "Cut The Funds - Vulnerable App",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_ac0e9999677d484f9ca63078237943e8",
+			"color": null,
+			"created": 1520328485901,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1520328485901,
+			"name": "New Environment",
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_48b9b89f578d41128f5bcd324ae14d22",
+			"cookies": [],
+			"created": 1520328485904,
+			"modified": 1520328485904,
+			"name": "Default Jar",
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_d58e9a5f10a546ebb9e1893bb33501b3",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"firstName\": \"Angry\",\n\t\"lastName\": \"Nagaraj\",\n\t\"email\": \"angry@dingri.com\",\n\t\"password\": \"helloworld\",\n\t\"userType\": \"user\"\n}"
+			},
+			"created": 1520328500330,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWJoYXlAd2U0NS5jb20iLCJpYXQiOjE1MjA1Nzk1NTEsImV4cCI6MTUyMDY2NTk1MX0.D_ZaWfu4OftXI0fWJXhdmVW9jpx1F7rXG-4QW0Fsht4"
+				}
+			],
+			"metaSortKey": -1520328500330,
+			"method": "POST",
+			"modified": 1520584687615,
+			"name": "User Create",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/create_user",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d7158d3dafa841ee924887276f976ca7",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"email\": \"angry@dingri.com\",\n\t\"password\": \"helloworld\"\n}"
+			},
+			"created": 1520348392796,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1520348392796,
+			"method": "POST",
+			"modified": 1522080676087,
+			"name": "Login User",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/login",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6fbc2e1bb9c34d96a294350bba583bba",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"projectName\": \"Test Project\",\n\t\"limit\": 100.00\n}"
+			},
+			"created": 1520524214705,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZGluZ3JpQGh1bmdyeTUuY29tIiwiaWF0IjoxNTIwNTI0NDUxLCJleHAiOjE1MjA2MTA4NTF9.igIfws-GOhxdjJYIhzni3pp3gr6-6pq0cmOGML-amjg"
+				}
+			],
+			"metaSortKey": -1520524214705,
+			"method": "POST",
+			"modified": 1520565545066,
+			"name": "Create Project",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/projects/create_project",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bb503e5b111e406d8144cdc12fec4044",
+			"authentication": {},
+			"body": {},
+			"created": 1520565080237,
+			"description": "",
+			"headers": [
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZGluZ3JpQGh1bmdyeTUuY29tIiwiaWF0IjoxNTIyMDQ4MjAxLCJleHAiOjE1MjIxMzQ2MDF9.-Ve_0qsSCEfNT1QaJQ3meN_UwCrOuClePiN_wknsX7A"
+				}
+			],
+			"metaSortKey": -1520565080237,
+			"method": "GET",
+			"modified": 1522048210232,
+			"name": "List Projects",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/projects/list_projects",
+			"_type": "request"
+		},
+		{
+			"_id": "req_cd9ae491a02e44c59c782bc3f9d7643f",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"Bro Project\",\n\t\"limit\": 120.00\n}"
+			},
+			"created": 1520566552735,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZGluZ3JpQGh1bmdyeTUuY29tIiwiaWF0IjoxNTIwNTI0NDUxLCJleHAiOjE1MjA2MTA4NTF9.igIfws-GOhxdjJYIhzni3pp3gr6-6pq0cmOGML-amjg"
+				}
+			],
+			"metaSortKey": -1520566552735,
+			"method": "POST",
+			"modified": 1520566724024,
+			"name": "Update Project",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/projects/update_project/5aa15f306f8575c31358ab3a",
+			"_type": "request"
+		},
+		{
+			"_id": "req_1dcfbccbed384e568f234bacbdfbe57e",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"Delhi Food\",\n\t\"projectId\": \"5aa15f306f8575c31358ab3a\",\n\t\"merchant\": \"Gupta Chaat Bhandaar\",\n\t\"reason\": \"Dinner Expenses\",\n\t\"amount\": 30.00\n}"
+			},
+			"created": 1520579602382,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaHVuZ3J5QGRpbmdyaS5jb20iLCJpYXQiOjE1MjA1Nzk1ODIsImV4cCI6MTUyMDY2NTk4Mn0.fccDSnlpxd5gECWjJDJ9nstno4yutQBxQ9TrsHhWhWs"
+				}
+			],
+			"metaSortKey": -1520579602382,
+			"method": "POST",
+			"modified": 1520580877028,
+			"name": "Create Expense",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/expenses/create_expense",
+			"_type": "request"
+		},
+		{
+			"_id": "req_36508694e3ab4a69b2df39e43246bdc8",
+			"authentication": {},
+			"body": {},
+			"created": 1520583379542,
+			"description": "",
+			"headers": [
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYW5ncnlAZGluZ3JpLmNvbSIsImlhdCI6MTUyMDU4NDcxMCwiZXhwIjoxNTIwNjcxMTEwfQ.3K90Fu0wJdP6wQFbrtLtoClPxEWcTufp8ELpDtNUMlQ"
+				}
+			],
+			"metaSortKey": -1520583379542,
+			"method": "GET",
+			"modified": 1520584720452,
+			"name": "List My Expense",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/expenses/get_my_expenses",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4278a3591d0a42bebe4b7e8b740e1752",
+			"authentication": {},
+			"body": {
+				"mimeType": "multipart/form-data",
+				"params": [
+					{
+						"fileName": "/Users/abhaybhargav/Downloads/crap.html",
+						"id": "pair_2e65458c4ea84abdb6889c06ac252cf5",
+						"name": "expenseFile",
+						"type": "file",
+						"value": ""
+					},
+					{
+						"id": "pair_b4ba09815e344db396631cf07a4fd19d",
+						"name": "description",
+						"value": "Test Upload File 6"
+					}
+				]
+			},
+			"created": 1520600704959,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "multipart/form-data"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYW5ncnlAZGluZ3JpLmNvbSIsImlhdCI6MTUyMDU4NDcxMCwiZXhwIjoxNTIwNjcxMTEwfQ.3K90Fu0wJdP6wQFbrtLtoClPxEWcTufp8ELpDtNUMlQ"
+				}
+			],
+			"metaSortKey": -1520600704959,
+			"method": "POST",
+			"modified": 1520603936971,
+			"name": "Upload Expense File",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/expenses/upload_file/5aa2390fe636246624456ecc",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4cd3e25cccdc404c905247d2ef72ac42",
+			"authentication": {},
+			"body": {},
+			"created": 1520605068468,
+			"description": "",
+			"headers": [
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZGluZ3JpQGh1bmdyeTUuY29tIiwiaWF0IjoxNTIwNTI0NDUxLCJleHAiOjE1MjA2MTA4NTF9.igIfws-GOhxdjJYIhzni3pp3gr6-6pq0cmOGML-amjg"
+				}
+			],
+			"metaSortKey": -1520605068468,
+			"method": "PATCH",
+			"modified": 1520605206097,
+			"name": "Approve Expense",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/expenses/approve_expense/5aa237a3d52bd364f816c2b0",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c04a602bbe4649d896fc28e05c722824",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"isApproved\": true\n}"
+			},
+			"created": 1520612735343,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYW5ncnlAZGluZ3JpLmNvbSIsImlhdCI6MTUyMDU4NDcxMCwiZXhwIjoxNTIwNjcxMTEwfQ.3K90Fu0wJdP6wQFbrtLtoClPxEWcTufp8ELpDtNUMlQ"
+				}
+			],
+			"metaSortKey": -1520612735343,
+			"method": "POST",
+			"modified": 1520612807037,
+			"name": "Update Expense",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/expenses/update_expense/5aa2390fe636246624456ecc",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e9782a05b79b445b9b92285ce340a5ae",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"search\": \"Labour' UNION ALL SELECT null, (SELECT @@version)-- \"\n}"
+			},
+			"created": 1520614352320,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZGluZ3JpQGh1bmdyeTUuY29tIiwiaWF0IjoxNTIwNjE1MTk1LCJleHAiOjE1MjA3MDE1OTV9.eSozFP9ohMdvcaSl2bsbCJO8X0n8DxmvMOAIDpMP4SI"
+				}
+			],
+			"metaSortKey": -1520614352320,
+			"method": "POST",
+			"modified": 1520616737066,
+			"name": "SQLi Search ",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/projects/search_expense_db",
+			"_type": "request"
+		},
+		{
+			"_id": "req_fef955e588bc470b9d34b1d256e49c2b",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"expenseObject\": \"eyJyY2UiOiJfJCRORF9GVU5DJCRfZnVuY3Rpb24gKCl7cmVxdWlyZShcJ2NoaWxkX3Byb2Nlc3NcJykuZXhlYyhcJ2xzIC9cJywgZnVuY3Rpb24oZXJyb3IsIHN0ZG91dCwgc3RkZXJyKSB7IGNvbnNvbGUubG9nKHN0ZG91dCkgfSk7fSgpIn0=\"\n}"
+			},
+			"created": 1520689369938,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1520689369938,
+			"method": "POST",
+			"modified": 1520690829031,
+			"name": "Serialize Req",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/projects/serialize",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a7eff1f9054c441593ab3dd3dcf57fa6",
+			"authentication": {},
+			"body": {
+				"mimeType": "multipart/form-data",
+				"params": [
+					{
+						"fileName": "/Users/abhaybhargav/Documents/Code/Python/ctf_main/ctf_main/ctf4_admin_app/test.yml",
+						"id": "pair_79ada45f69f74c699815619de03fca25",
+						"name": "yamlExpense",
+						"type": "file",
+						"value": ""
+					}
+				]
+			},
+			"created": 1522047485535,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "multipart/form-data"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZGluZ3JpQGh1bmdyeTUuY29tIiwiaWF0IjoxNTIwNjE1MTk1LCJleHAiOjE1MjA3MDE1OTV9.eSozFP9ohMdvcaSl2bsbCJO8X0n8DxmvMOAIDpMP4SI"
+				}
+			],
+			"metaSortKey": -1522047485536,
+			"method": "POST",
+			"modified": 1522055522360,
+			"name": "YAML Expense Post",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/expenses/yaml_upload",
+			"_type": "request"
+		},
+		{
+			"_id": "req_325eba2af8e34b598f000b36b86cbdfd",
+			"authentication": {},
+			"body": {},
+			"created": 1522059452183,
+			"description": "",
+			"headers": [
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZGluZ3JpQGh1bmdyeTUuY29tIiwiaWF0IjoxNTIyMDQ4MjAxLCJleHAiOjE1MjIxMzQ2MDF9.-Ve_0qsSCEfNT1QaJQ3meN_UwCrOuClePiN_wknsX7A"
+				}
+			],
+			"metaSortKey": -1522059452183,
+			"method": "GET",
+			"modified": 1522059543658,
+			"name": "Project Expenses",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/expenses/project_expenses/5aa15f306f8575c31358ab3a",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8642acdc58954662afad998402c43bf7",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"cardNumber\": \"5111111111111111\"\n}"
+			},
+			"created": 1522080422394,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYW5ncnlAZGluZ3JpLmNvbSIsImlhdCI6MTUyMjA4MDY3NywiZXhwIjoxNTIyMTY3MDc3fQ.4l8RZ_FsPOkHI_4oMgvGCBxHHEljuS6QMsj21imju60"
+				}
+			],
+			"metaSortKey": -1522080422394,
+			"method": "POST",
+			"modified": 1522080693470,
+			"name": "Create Card",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/create_card",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b0e6085cf39b425f80aa523e85bdcaf2",
+			"authentication": {},
+			"body": {},
+			"created": 1522120939795,
+			"description": "",
+			"headers": [
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYW5ncnlAZGluZ3JpLmNvbSIsImlhdCI6MTUyMjEyMDk2NywiZXhwIjoxNTIyMjA3MzY3fQ.bVmAQx7dOej20QLWkn9IznDBfT1Cx53hwjNrDeOK0nM"
+				}
+			],
+			"metaSortKey": -1522120939795,
+			"method": "GET",
+			"modified": 1522121008513,
+			"name": "Get Single Expense",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/expenses/single_expense/5aa237a3d52bd364f816c2b0",
+			"_type": "request"
+		},
+		{
+			"_id": "req_9c34c05492e2413ea524e7cf0a0da244",
+			"authentication": {},
+			"body": {},
+			"created": 1522121527235,
+			"description": "",
+			"headers": [
+				{
+					"name": "Authorization",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYW5ncnlAZGluZ3JpLmNvbSIsImlhdCI6MTUyMjEyMDk2NywiZXhwIjoxNTIyMjA3MzY3fQ.bVmAQx7dOej20QLWkn9IznDBfT1Cx53hwjNrDeOK0nM"
+				}
+			],
+			"metaSortKey": -1522121527235,
+			"method": "GET",
+			"modified": 1522121665361,
+			"name": "List Cards",
+			"parameters": [],
+			"parentId": "wrk_fd372d495e844d8b85c8ae330d889be2",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/get_cards",
+			"_type": "request"
+		}
+	]
+}

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
+const cors = require('cors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
@@ -11,6 +12,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const projects = require("./routes/projects");
 const expenses = require("./routes/expenses");
+const helmet = require("helmet");
 
 
 const app = express();
@@ -23,10 +25,25 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(fileUpload());
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet({
+    frameguard: {
+        action: "deny"
+    }
+}));
+// var node_ip = process.env.NODE_IP || 'http://localhost:3000';
+// var ssrf_url = node_ip+'/expenses/ssrf/'
+
+// app.use(helmet.contentSecurityPolicy({
+//     directives: {
+//         defaultSrc: ["'self', 'http://localhost:3000/expenses/ssrf/' "],
+//         styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
+//     }
+//  }));
 
 app.use('/', index);
 app.use('/users', users);
