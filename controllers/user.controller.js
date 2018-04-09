@@ -102,3 +102,28 @@ module.exports.listCards = async (req, res) => {
     }
 
 };
+
+module.exports.getProfile = async (req, res) => {
+    let tokenHeader = req.header("Authorization");
+    let validObject = await auth.validateManager(tokenHeader, "modify_project");
+    if (validObject.tokenValid && validObject.roleValid) {
+        User
+            .findOne({_id: validObject.user})
+            .select({
+                "firstName": true,
+                "lastName": true,
+                "email": true,
+            })
+            .then(doc => {
+                res.status(200).json(doc);
+                log.info(req)
+                log.info(res)
+            })
+            .catch(err => {
+                res.status(400).json({error: err});
+                log.info(err)
+            })
+    } else {
+        res.status(403).json({error: "unauthorized"});
+    }
+};

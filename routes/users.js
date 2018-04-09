@@ -28,5 +28,9 @@ router
     .route('/get_cards')
     .get(user.listCards);
 
+router
+    .route('/get_profile')
+    .get(user.getProfile);
+
 
 module.exports = router;
