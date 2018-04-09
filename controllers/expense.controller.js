@@ -263,7 +263,7 @@ module.exports.getStats = async (req, res) => {
             await Expense.count({user: validObject.user, isApproved: true})
                 .then(doc => {
                     approved = doc;
-                    console.log("Approved: " + approved)
+                    console.log("Approved: " + approved);
                     log.info(req);
                     log.info(res);
                 })
@@ -301,6 +301,8 @@ module.exports.getStats = async (req, res) => {
                 });
 
             res.status(200).json({approvedStats: {approved: approved, total: total}, expReason: expByReason});
+        } else if (validObject.userType === "manager") {
+            
         }
     } else {
         res.status(403).json({error: "unauthorized"})
@@ -308,14 +310,14 @@ module.exports.getStats = async (req, res) => {
 };
 
 module.exports.getSsrf = async (req, res) => {
-    var url = req.query['url'];
-    if (req.query['mime'] == 'plain') {
-        var mime = 'plain';
+    let url = req.query['url'];
+    if (req.query['mime'] === 'plain') {
+        let mime = 'plain';
     } else {
-        var mime = 'html';
-    };
+        let mime = 'html';
+    }
     needle.get(url,{ timeout: 3000 }, function (error, response1) {
-        if (!error && response1.statusCode == 200) {
+        if (!error && response1.statusCode === 200) {
             res.writeHead(200, {'Content-Type': 'text/' + mime});
             res.write(response1.body);
             res.end();
