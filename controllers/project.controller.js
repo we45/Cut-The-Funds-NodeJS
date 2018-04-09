@@ -113,12 +113,12 @@ module.exports.updateProject = async (req, res) => {
 module.exports.searchExpenseDb = async (req, res) => {
     try {
         let tokenHeader = req.header("Authorization");
-        console.log(tokenHeader)
+        console.log(tokenHeader);
         let validObject = await auth.validateManager(tokenHeader, "create_project");
         console.log(validObject);
         if (validObject.tokenValid && validObject.roleValid) {
             console.log(validObject);
-            let dynamicQuery = "SELECT name, pol_grp from expenses_detail WHERE pol_grp = '" + req.body.search + "'";
+            let dynamicQuery = "SELECT country, currency_code from currency WHERE country = '" + req.body.search + "'";
             console.log(dynamicQuery);
             connection.query(dynamicQuery, function(error, results, fields) {
                 if (error) {

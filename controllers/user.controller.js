@@ -4,6 +4,7 @@ const conf = require("../config/config.dev");
 const jwt = require("jsonwebtoken");
 const pbk = require("pbkdf2");
 const auth = require("./auth.controller");
+const crypto = require("crypto");
 
 module.exports.authenticate = (req, res) => {
     let email = req.body.email;
@@ -49,8 +50,11 @@ module.exports.createCard = async (req, res) => {
     let tokenHeader = req.header("Authorization");
     let validObject = await auth.validateUser(tokenHeader, "create_card");
     if (validObject.tokenValid && validObject.roleValid) {
+        let cipher = crypto.createCipher('aes-128-ecb', 'd6F3Efeqd6F3Efeq');
+        let encrypted = cipher.update(req.body.cardNumber, 'utf8', 'hex')
+        encrypted += cipher.final('hex');
         User
-            .update({_id: validObject.user}, {$push: {cards: req.body.cardNumber}})
+            .update({_id: validObject.user}, {$push: {cards: encrypted}})
             .then(doc => {
                 res.status(200).json(doc);
             })

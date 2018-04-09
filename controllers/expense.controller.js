@@ -207,7 +207,7 @@ module.exports.yamlExpensePost = async (req, res) => {
         let ystring = ybuf.toString();
 
         let y = yaml.load(ystring);
-        console.log(y.expenses[0].expense.reason());
+        console.log("Hello".toString());
         res.status(200).json(y);
         // } else {
         //     res.status(403).json({error: "Invalid access attempt"});
