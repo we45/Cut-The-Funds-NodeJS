@@ -302,7 +302,34 @@ module.exports.getStats = async (req, res) => {
 
             res.status(200).json({approvedStats: {approved: approved, total: total}, expReason: expByReason});
         } else if (validObject.userType === "manager") {
-            
+            let approved;
+            let total = {};
+            let projectsForManager;
+            await Project.find({manager: validObject.user})
+                .select({_id: true})
+                .then(doc => {
+                    console.log(doc);
+                    projectsForManager = doc;
+                    // res.status(200).json(doc);
+                })
+                .catch(error => {
+                    log.error(error);
+                    res.status(400).json({error: error})
+                });
+            console.log(typeof projectsForManager);
+            for (let single of projectsForManager) {
+                console.log("Single: " + single);
+                await Expense.find({project: mongoose.Types.ObjectId(single._id)})
+                    .select({files: false})
+                    .then(doc => {
+                        total[single._id] = doc
+                    })
+                    .catch(error => {
+                        log.error(error);
+                        res.status(400).json({error: error})
+                    })
+            }
+            res.status(200).json(total);
         }
     } else {
         res.status(403).json({error: "unauthorized"})
