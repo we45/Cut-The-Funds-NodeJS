@@ -11,7 +11,7 @@ uploadscrap.html
 
 *.csv
 *.log
-.DS_Store
+*.DS_Store
 node_modules/
 /dist/
 npm-debug.log*
