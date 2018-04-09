@@ -35,13 +35,15 @@ app.use(helmet({
         action: "deny"
     }
 }));
+// var node_ip = process.env.NODE_IP || 'http://localhost:3000';
+// var ssrf_url = node_ip+'/expenses/ssrf/'
 
-app.use(helmet.contentSecurityPolicy({
-    directives: {
-        defaultSrc: ["'self'"],
-        styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
-    }
- }));
+// app.use(helmet.contentSecurityPolicy({
+//     directives: {
+//         defaultSrc: ["'self', 'http://localhost:3000/expenses/ssrf/' "],
+//         styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
+//     }
+//  }));
 
 app.use('/', index);
 app.use('/users', users);
