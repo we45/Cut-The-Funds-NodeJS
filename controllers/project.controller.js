@@ -32,7 +32,7 @@ module.exports.projectCreate = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err})
-                log.info(err);
+                log.error(err);
             })
     } else {
         res.status(403).json({error: "Not Authorized"})
@@ -54,7 +54,7 @@ module.exports.listProjectsManager = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.info(err);
+                    log.error(err);
                 })
 
         } else {
@@ -80,7 +80,7 @@ module.exports.listProjectsUser = async (req, res) => {
                     log.info(res);
                 })
                 .catch(err => {
-                    log.info(err);
+                    log.error(err);
                     res.status(400).json({error: err})
                 })
 
@@ -110,6 +110,7 @@ module.exports.updateProject = async (req, res) => {
                   res.status(200).json(doc)
               })
               .catch(err => {
+                  log.error(err)
                   res.status(400).json({error: err})
               })
       } else {
@@ -133,8 +134,10 @@ module.exports.searchExpenseDb = async (req, res) => {
             console.log(dynamicQuery);
             connection.query(dynamicQuery, function(error, results, fields) {
                 if (error) {
+                    log.error(error)
                     res.status(500).json(error);
                 }
+                log.info(results);
                 res.status(200).json(results);
             })
         } else {

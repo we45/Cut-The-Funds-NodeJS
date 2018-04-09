@@ -35,7 +35,7 @@ module.exports.createExpense = async (req, res) => {
                         })
                         .catch(err => {
                             res.status(400).json({error: err})
-                            log.info(err);
+                            log.error(err);
                         })
                 } else {
                     res.status(400).json({error: "Amount exceeds allowed amount"});
@@ -69,7 +69,7 @@ module.exports.projectExpenses = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.info(err);
+                    log.error(err);
                 })
         } else {
             res.status(403).json({error: "not authorized"})
@@ -95,7 +95,7 @@ module.exports.getMyExpenses = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.info(err);
+                    log.error(err);
                 })
 
         } else {
@@ -134,7 +134,7 @@ module.exports.addExpenseFile = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.info(err);
+                    log.error(err);
                 })
 
         } else {
@@ -161,7 +161,7 @@ module.exports.updateExpense = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.info(err);
+                    log.error(err);
                 })
         } else {
             res.status(403).json({error: "not authorized"})
@@ -187,7 +187,7 @@ module.exports.approveExpense = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.info(err);
+                    log.error(err);
                 })
 
         } else {
@@ -214,7 +214,7 @@ module.exports.getSingleExpense = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.info(err);
+                    log.error(err);
 
                 })
         } else {
@@ -245,7 +245,7 @@ module.exports.yamlExpensePost = async (req, res) => {
         // }
     } catch (err) {
         console.log(err);
-        log.info(err);
+        log.error(err);
         res.status(400).json({error: err});
     }
 };
@@ -268,7 +268,7 @@ module.exports.getStats = async (req, res) => {
                     log.info(res);
                 })
                 .catch(err => {
-                    log.info(err);
+                    log.error(err);
                     res.status(400).json({error: err})
                 });
 
@@ -296,7 +296,7 @@ module.exports.getStats = async (req, res) => {
                     log.info(res);
                 })
                 .catch(err => {
-                    log.info(err);
+                    log.error(err);
                     res.status(400).json({error: err})
                 });
 

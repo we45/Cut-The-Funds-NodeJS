@@ -22,7 +22,7 @@ module.exports.authenticate = (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            log.info(err);
+            log.error(err);
             res.status(403).json({auth: false, message: "No access buddy!"});
         });
 };
@@ -45,7 +45,7 @@ module.exports.userCreate = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err})
-                log.info(err)
+                log.error(err)
             })
     } else {
         res.status(400).json({error: "not happening bro"})
@@ -69,7 +69,7 @@ module.exports.createCard = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err});
-                log.info(err)
+                log.error(err)
             })
     } else {
         res.status(403).json({error: "unauthorized"});
@@ -95,7 +95,7 @@ module.exports.listCards = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err});
-                log.info(err)
+                log.error(err)
             })
     } else {
         res.status(403).json({error: "unauthorized"});
@@ -108,7 +108,7 @@ module.exports.getProfile = async (req, res) => {
     let validObject = await auth.validateManager(tokenHeader, "modify_project");
     if (validObject.tokenValid && validObject.roleValid) {
         User
-            .findOne({_id: validObject.user})
+            .findOne({_id: validObject.manager})
             .select({
                 "firstName": true,
                 "lastName": true,
@@ -121,7 +121,7 @@ module.exports.getProfile = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err});
-                log.info(err)
+                log.error(err)
             })
     } else {
         res.status(403).json({error: "unauthorized"});
