@@ -22,7 +22,7 @@ module.exports.authenticate = (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            log.error(err);
+            log.info(err);
             res.status(403).json({auth: false, message: "No access buddy!"});
         });
 };
@@ -45,7 +45,7 @@ module.exports.userCreate = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err})
-                log.error(err)
+                log.info(err)
             })
     } else {
         res.status(400).json({error: "not happening bro"})
@@ -69,7 +69,7 @@ module.exports.createCard = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err});
-                log.error(err)
+                log.info(err)
             })
     } else {
         res.status(403).json({error: "unauthorized"});
@@ -95,7 +95,7 @@ module.exports.listCards = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err});
-                log.error(err)
+                log.info(err)
             })
     } else {
         res.status(403).json({error: "unauthorized"});
@@ -121,7 +121,7 @@ module.exports.getProfile = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err});
-                log.error(err)
+                log.info(err)
             })
     } else {
         res.status(403).json({error: "unauthorized"});

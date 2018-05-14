@@ -35,7 +35,7 @@ module.exports.createExpense = async (req, res) => {
                         })
                         .catch(err => {
                             res.status(400).json({error: err})
-                            log.error(err);
+                            log.info(err);
                         })
                 } else {
                     res.status(400).json({error: "Amount exceeds allowed amount"});
@@ -69,7 +69,7 @@ module.exports.projectExpenses = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.error(err);
+                    log.info(err);
                 })
         } else {
             res.status(403).json({error: "not authorized"})
@@ -95,7 +95,7 @@ module.exports.getMyExpenses = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.error(err);
+                    log.info(err);
                 })
 
         } else {
@@ -134,7 +134,7 @@ module.exports.addExpenseFile = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.error(err);
+                    log.info(err);
                 })
 
         } else {
@@ -161,7 +161,7 @@ module.exports.updateExpense = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.error(err);
+                    log.info(err);
                 })
         } else {
             res.status(403).json({error: "not authorized"})
@@ -187,7 +187,7 @@ module.exports.approveExpense = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.error(err);
+                    log.info(err);
                 })
 
         } else {
@@ -214,7 +214,7 @@ module.exports.getSingleExpense = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.error(err);
+                    log.info(err);
 
                 })
         } else {
@@ -245,7 +245,7 @@ module.exports.yamlExpensePost = async (req, res) => {
         // }
     } catch (err) {
         console.log(err);
-        log.error(err);
+        log.info(err);
         res.status(400).json({error: err});
     }
 };
@@ -268,7 +268,7 @@ module.exports.getStats = async (req, res) => {
                     log.info(res);
                 })
                 .catch(err => {
-                    log.error(err);
+                    log.info(err);
                     res.status(400).json({error: err})
                 });
 
@@ -296,12 +296,13 @@ module.exports.getStats = async (req, res) => {
                     log.info(res);
                 })
                 .catch(err => {
-                    log.error(err);
+                    log.info(err);
                     res.status(400).json({error: err})
                 });
 
             res.status(200).json({approvedStats: {approved: approved, total: total}, expReason: expByReason});
         } else if (validObject.userType === "manager") {
+            console.log("manager")
             let approved;
             let total = {};
             let projectsForManager;
@@ -313,7 +314,7 @@ module.exports.getStats = async (req, res) => {
                     // res.status(200).json(doc);
                 })
                 .catch(error => {
-                    log.error(error);
+                    // log.error(error);
                     res.status(400).json({error: error})
                 });
             console.log(typeof projectsForManager);
@@ -325,7 +326,7 @@ module.exports.getStats = async (req, res) => {
                         total[single._id] = doc
                     })
                     .catch(error => {
-                        log.error(error);
+                        // log.error(error);
                         res.status(400).json({error: error})
                     })
             }
@@ -337,11 +338,11 @@ module.exports.getStats = async (req, res) => {
 };
 
 module.exports.getSsrf = async (req, res) => {
-    let url = req.query['url'];
+    var url = req.query['url'];    
     if (req.query['mime'] === 'plain') {
-        let mime = 'plain';
+        var mime = 'plain';
     } else {
-        let mime = 'html';
+        var mime = 'html';
     }
     needle.get(url,{ timeout: 3000 }, function (error, response1) {
         if (!error && response1.statusCode === 200) {

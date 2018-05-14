@@ -32,7 +32,7 @@ module.exports.projectCreate = async (req, res) => {
             })
             .catch(err => {
                 res.status(400).json({error: err})
-                log.error(err);
+                log.info(err);
             })
     } else {
         res.status(403).json({error: "Not Authorized"})
@@ -54,7 +54,7 @@ module.exports.listProjectsManager = async (req, res) => {
                 })
                 .catch(err => {
                     res.status(400).json({error: err})
-                    log.error(err);
+                    log.info(err);
                 })
 
         } else {
@@ -80,7 +80,7 @@ module.exports.listProjectsUser = async (req, res) => {
                     log.info(res);
                 })
                 .catch(err => {
-                    log.error(err);
+                    log.info(err);
                     res.status(400).json({error: err})
                 })
 
@@ -110,7 +110,7 @@ module.exports.updateProject = async (req, res) => {
                   res.status(200).json(doc)
               })
               .catch(err => {
-                  log.error(err)
+                  log.info(err)
                   res.status(400).json({error: err})
               })
       } else {
@@ -125,16 +125,14 @@ module.exports.updateProject = async (req, res) => {
 module.exports.searchExpenseDb = async (req, res) => {
     try {
         let tokenHeader = req.header("Authorization");
-        console.log(tokenHeader);
         let validObject = await auth.validateManager(tokenHeader, "create_project");
-        console.log(validObject);
         if (validObject.tokenValid && validObject.roleValid) {
             console.log(validObject);
             let dynamicQuery = "SELECT country, currency_code from currency WHERE country = '" + req.body.search + "'";
             console.log(dynamicQuery);
             connection.query(dynamicQuery, function(error, results, fields) {
                 if (error) {
-                    log.error(error)
+                    log.info(error)
                     res.status(500).json(error);
                 }
                 log.info(results);
