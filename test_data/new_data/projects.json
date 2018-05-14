@@ -1,0 +1,2 @@
+{ "_id" : { "$oid" : "5ace0e85b10d64111c00adb1" }, "name" : "Project Vulcan", "manager" : { "$oid" : "5ace0a57b10d64111c00adb0" }, "limit" : 500, "__v" : 0 }
+{ "_id" : { "$oid" : "5ace0e85b10d64111c00adb2" }, "name" : "RSA Conference", "manager" : { "$oid" : "5ace0a57b10d64111c00adb0" }, "limit" : 800, "__v" : 0 }
