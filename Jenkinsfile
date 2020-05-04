@@ -1,4 +1,5 @@
 node{
+    
     stage('NpmAudit'){
         sh 'npm audit --json >> audit-report.json | true'
         archiveArtifacts allowEmptyArchive: true, artifacts: '**/audit-report.json', onlyIfSuccessful: true
