@@ -7,7 +7,7 @@ node{
     stage ('Checkout'){
         git branch: 'master', 
             credentialsId: 'GitScout',
-            url: 'https://github.com/azurescout/ctf.git'
+            url: 'https://github.com/we45/Cut-The-Funds-NodeJS.git'
     }  
     
     stage('NpmAudit'){
