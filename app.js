@@ -1,4 +1,5 @@
 //Subjected to SemGrep Scanning
+// made no changes, yet to check the QG
 
 require("./db/db.js");
 const mongoose = require("mongoose");
